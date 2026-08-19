@@ -9,21 +9,42 @@ const errorHandler = require('./middleware/errorHandler');
 // Load env vars
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
-// Connect to database
-connectDB();
-
 const app = express();
 
 // Body parser
 app.use(express.json({ limit: '10mb' }));
 
-// Enable CORS
+// Enable CORS — allow localhost in dev, any Vercel origin in production
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+];
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. server-to-server, Vercel same-domain)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+        return callback(null, true);
+      }
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );
+
+// ─── Serverless DB Connection Middleware ─────────────────────────────────────
+// MUST run before every route so that mongoose.connect() is always awaited.
+// connectDB() returns immediately from cache on warm Vercel invocations.
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('❌ DB connection error:', err.message);
+    res.status(503).json({ success: false, message: 'Database unavailable. Please try again.' });
+  }
+});
 
 // Rate limiting for auth routes
 const authLimiter = rateLimit({
