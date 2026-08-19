@@ -4,7 +4,7 @@
 
 **A modern, premium task management application designed to make everyday productivity simple, fast, and visually beautiful.**
 
-[Live Demo](#) · [Report Bug](#) · [Request Feature](#)
+[Live Demo](#) 
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -20,8 +20,8 @@
 
 ## 📸 Project Preview
 
-> **Screenshots coming soon.**
-> *(Check back later for a detailed visual preview of the dashboard, dark mode, and mobile layouts!)*
+<img width="1688" height="886" alt="image" src="https://github.com/user-attachments/assets/fe423af7-771f-4b42-83d1-af8d7dc0fd38" />
+
 
 ---
 
@@ -236,7 +236,7 @@ This project is natively configured for deployment on **Vercel** via serverless 
 **Built with ☕ and JavaScript by Arushi Singh**  
 *Engineering Student · Developer*
 
-[GitHub](#) · [LinkedIn](#)
+[Gmail](arushi.s246@gmail.com) · [LinkedIn](www.linkedin.com/in/arushisingh21)
 
 <br>
 
